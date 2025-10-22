@@ -1,6 +1,7 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { KeyboardProvider } from './contexts/KeyboardContext';
 import App from './App.tsx';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -44,7 +45,9 @@ function RootApp() {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
-      <RootApp />
+      <KeyboardProvider>
+        <RootApp />
+      </KeyboardProvider>
     </AuthProvider>
   </StrictMode>
 );

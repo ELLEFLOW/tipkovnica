@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { ArrowLeft, Upload, Database, Users, FileText, Trash2 } from 'lucide-react';
 
@@ -11,7 +10,6 @@ interface Stats {
 }
 
 export function AdminPage({ onBack }: { onBack: () => void }) {
-  const { user } = useAuth();
   const [stats, setStats] = useState<Stats>({
     totalUsers: 0,
     totalTexts: 0,
