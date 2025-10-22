@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Keyboard } from './components/Keyboard';
-import { Type, Save, LogOut, User, FileText } from 'lucide-react';
+import { Type, Save, LogOut, User, FileText, Settings } from 'lucide-react';
 import { useAuth } from './contexts/AuthContext';
 import { supabase } from './lib/supabase';
 
-function App({ onShowSavedTexts }: { onShowSavedTexts: () => void }) {
+function App({ onShowSavedTexts, onShowAdmin }: { onShowSavedTexts: () => void; onShowAdmin: () => void }) {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
   const [showSaveModal, setShowSaveModal] = useState(false);
@@ -92,6 +92,14 @@ function App({ onShowSavedTexts }: { onShowSavedTexts: () => void }) {
                   <User className="w-5 h-5" />
                   <span className="text-sm">{user.email}</span>
                 </div>
+                <button
+                  onClick={onShowAdmin}
+                  className="px-4 py-2 bg-purple-500 text-white rounded-lg font-medium
+                           hover:bg-purple-600 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <Settings className="w-4 h-4" />
+                  Admin
+                </button>
                 <button
                   onClick={onShowSavedTexts}
                   className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium

@@ -5,12 +5,14 @@ import App from './App.tsx';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SavedTextsPage } from './pages/SavedTextsPage';
+import { AdminPage } from './pages/AdminPage';
 import './index.css';
 
 function RootApp() {
   const { user, loading } = useAuth();
   const [showRegister, setShowRegister] = useState(false);
   const [showSavedTexts, setShowSavedTexts] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
 
   if (loading) {
     return (
@@ -28,11 +30,15 @@ function RootApp() {
     );
   }
 
+  if (showAdmin) {
+    return <AdminPage onBack={() => setShowAdmin(false)} />;
+  }
+
   if (showSavedTexts) {
     return <SavedTextsPage onBack={() => setShowSavedTexts(false)} />;
   }
 
-  return <App onShowSavedTexts={() => setShowSavedTexts(true)} />;
+  return <App onShowSavedTexts={() => setShowSavedTexts(true)} onShowAdmin={() => setShowAdmin(true)} />;
 }
 
 createRoot(document.getElementById('root')!).render(
