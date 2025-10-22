@@ -111,10 +111,10 @@ export function Keyboard({ onInput, onBackspace, onSpace, onEnter }: KeyboardPro
   };
 
   return (
-    <div className="bg-gray-800 p-4 rounded-2xl shadow-2xl">
-      <div className="space-y-2">
+    <div className="bg-gradient-to-b from-gray-200 to-gray-300 p-2 rounded-t-2xl shadow-lg h-full overflow-y-auto">
+      <div className="space-y-1.5">
         {croatianLayout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-1.5">
+          <div key={rowIndex} className="flex justify-center gap-1">
             {row.map((keyConfig) => (
               <Key
                 key={keyConfig.code}
@@ -128,62 +128,62 @@ export function Keyboard({ onInput, onBackspace, onSpace, onEnter }: KeyboardPro
               <button
                 onClick={handleBackspaceClick}
                 className={`
-                  min-w-[100px] h-[70px] rounded-lg font-semibold text-lg
-                  transition-all duration-100 shadow-md touch-manipulation select-none
+                  min-w-[60px] h-[42px] rounded-md font-medium text-sm
+                  transition-all duration-100 shadow-sm touch-manipulation select-none
                   ${pressedKeys.has('Backspace')
-                    ? 'bg-red-600 text-white scale-95 shadow-inner'
-                    : 'bg-red-500 text-white hover:bg-red-600 active:scale-95'
+                    ? 'bg-gray-500 text-white scale-95 shadow-inner'
+                    : 'bg-gray-400 text-white hover:bg-gray-500 active:scale-95'
                   }
                 `}
               >
-                ⌫ Brisanje
+                ⌫
               </button>
             )}
           </div>
         ))}
 
-        <div className="flex justify-center gap-1.5">
+        <div className="flex justify-center gap-1">
           <button
             onClick={handleShiftClick}
             className={`
-              min-w-[110px] h-[70px] rounded-lg font-semibold text-lg
-              transition-all duration-100 shadow-md touch-manipulation select-none
+              min-w-[50px] h-[42px] rounded-md font-medium text-sm
+              transition-all duration-100 shadow-sm touch-manipulation select-none
               ${isShiftActive
-                ? 'bg-blue-600 text-white shadow-inner'
-                : 'bg-gray-300 text-gray-800 hover:bg-gray-400 active:scale-95'
+                ? 'bg-blue-500 text-white shadow-inner'
+                : 'bg-white text-gray-800 hover:bg-gray-100 active:scale-95 border border-gray-300'
               }
             `}
           >
-            ⇧ Shift
+            ⇧
           </button>
 
           <button
             onClick={handleSpaceClick}
             className={`
-              flex-1 h-[70px] rounded-lg font-semibold text-lg
-              transition-all duration-100 shadow-md touch-manipulation select-none
+              flex-1 h-[42px] rounded-md font-medium text-sm
+              transition-all duration-100 shadow-sm touch-manipulation select-none
               ${pressedKeys.has('Space')
-                ? 'bg-blue-600 text-white scale-95 shadow-inner'
+                ? 'bg-gray-300 scale-95 shadow-inner'
                 : 'bg-white text-gray-800 hover:bg-gray-50 active:scale-95'
               }
-              border-2 border-gray-300
+              border border-gray-300
             `}
           >
-            Razmak
+            SPACE
           </button>
 
           <button
             onClick={handleEnterClick}
             className={`
-              min-w-[110px] h-[70px] rounded-lg font-semibold text-lg
-              transition-all duration-100 shadow-md touch-manipulation select-none
+              min-w-[50px] h-[42px] rounded-md font-medium text-sm
+              transition-all duration-100 shadow-sm touch-manipulation select-none
               ${pressedKeys.has('Enter')
-                ? 'bg-green-600 text-white scale-95 shadow-inner'
-                : 'bg-green-500 text-white hover:bg-green-600 active:scale-95'
+                ? 'bg-blue-600 text-white scale-95 shadow-inner'
+                : 'bg-blue-500 text-white hover:bg-blue-600 active:scale-95'
               }
             `}
           >
-            ↵ Enter
+            ↵
           </button>
         </div>
       </div>

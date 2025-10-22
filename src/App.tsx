@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Keyboard } from './components/Keyboard';
-import { Type, Save, LogOut, User, FileText, Settings } from 'lucide-react';
+import { User, Save, FileText, Trash2 } from 'lucide-react';
 import { useAuth } from './contexts/AuthContext';
 import { supabase } from './lib/supabase';
 
@@ -10,7 +10,7 @@ function App({ onShowSavedTexts, onShowAdmin }: { onShowSavedTexts: () => void; 
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [saveError, setSaveError] = useState('');
   const [saveSuccess, setSaveSuccess] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
   const handleInput = (char: string) => {
     setText(prev => prev + char);
@@ -71,146 +71,90 @@ function App({ onShowSavedTexts, onShowAdmin }: { onShowSavedTexts: () => void; 
     }
   };
 
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        <header className="text-center mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <Type className="w-10 h-10 text-blue-600" />
-              <h1 className="text-4xl font-bold text-gray-800">
-                Hrvatska Tipkovnica
-              </h1>
-            </div>
-            {user && (
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-gray-700">
-                  <User className="w-5 h-5" />
-                  <span className="text-sm">{user.email}</span>
-                </div>
-                <button
-                  onClick={onShowAdmin}
-                  className="px-4 py-2 bg-purple-500 text-white rounded-lg font-medium
-                           hover:bg-purple-600 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <Settings className="w-4 h-4" />
-                  Admin
-                </button>
-                <button
-                  onClick={onShowSavedTexts}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium
-                           hover:bg-blue-600 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <FileText className="w-4 h-4" />
-                  Tekstovi
-                </button>
-                <button
-                  onClick={handleSignOut}
-                  className="px-4 py-2 bg-gray-500 text-white rounded-lg font-medium
-                           hover:bg-gray-600 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Odjava
-                </button>
-              </div>
-            )}
+    <div className="h-screen w-full bg-white flex flex-col overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-3 flex items-center justify-between shadow-md">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-white text-blue-600 rounded-lg flex items-center justify-center font-bold text-xl">
+            T
           </div>
-          <p className="text-lg text-gray-600">
-            Mobilna tipkovnica za hrvatski, kajkavski i engleski jezik
-          </p>
-        </header>
-
-        {saveSuccess && (
-          <div className="mb-4 p-4 bg-green-100 border border-green-300 rounded-xl text-green-700">
-            Tekst uspješno spremljen!
+          <div>
+            <h1 className="text-lg font-bold leading-tight">Hrvatska Tipkovnica</h1>
+            <p className="text-xs text-blue-100">Mobilna tipkovnica za hrvatski, kajkavski i engleski jezik</p>
           </div>
+        </div>
+        {user && (
+          <button className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center">
+            <User className="w-4 h-4" />
+          </button>
         )}
+      </div>
 
-        <div className="space-y-6">
-          <div className="bg-white rounded-2xl shadow-xl p-6">
-            <div className="flex items-center justify-between mb-4">
-              <label className="text-xl font-semibold text-gray-700">
-                Vaš tekst:
-              </label>
-              <div className="flex gap-2">
-                {user && (
+      {saveSuccess && (
+        <div className="mx-4 mt-2 p-3 bg-green-100 border border-green-300 rounded-lg text-green-700 text-sm">
+          Tekst uspješno spremljen!
+        </div>
+      )}
+
+      <div className="flex-1 flex flex-col px-4 pt-4 pb-2 overflow-hidden">
+        <div className="mb-3">
+          <div className="flex items-center justify-between mb-2">
+            <label className="text-base font-semibold text-gray-800">Vaš tekst:</label>
+            <div className="flex gap-2">
+              {user && (
+                <>
                   <button
                     onClick={() => setShowSaveModal(true)}
                     disabled={!text}
-                    className="px-4 py-2 bg-green-500 text-white rounded-lg font-medium
-                             hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed
-                             transition-colors duration-200 flex items-center gap-2"
+                    className="px-3 py-1.5 bg-blue-500 text-white rounded-lg text-sm font-medium
+                             hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed
+                             transition-colors flex items-center gap-1"
                   >
-                    <Save className="w-4 h-4" />
+                    <Save className="w-3.5 h-3.5" />
                     Spremi
                   </button>
-                )}
-                <button
-                  onClick={handleCopy}
-                  disabled={!text}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium
-                           hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed
-                           transition-colors duration-200"
-                >
-                  📋 Kopiraj
-                </button>
-                <button
-                  onClick={handleClear}
-                  disabled={!text}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg font-medium
-                           hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed
-                           transition-colors duration-200"
-                >
-                  🗑️ Obriši sve
-                </button>
-              </div>
-            </div>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="w-full min-h-[200px] p-4 text-xl border-2 border-gray-300 rounded-xl
-                       focus:border-blue-500 focus:outline-none resize-none font-sans"
-              placeholder="Počnite pisati koristeći tipkovnicu ispod..."
-            />
-            <div className="mt-2 text-sm text-gray-500">
-              Znakova: {text.length}
+                  <button
+                    onClick={onShowSavedTexts}
+                    className="px-3 py-1.5 bg-blue-500 text-white rounded-lg text-sm font-medium
+                             hover:bg-blue-600 transition-colors flex items-center gap-1"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    Kopiraj
+                  </button>
+                  <button
+                    onClick={handleClear}
+                    disabled={!text}
+                    className="px-3 py-1.5 bg-gray-400 text-white rounded-lg text-sm font-medium
+                             hover:bg-gray-500 disabled:bg-gray-300 disabled:cursor-not-allowed
+                             transition-colors flex items-center gap-1"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    Obriši sve
+                  </button>
+                </>
+              )}
             </div>
           </div>
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="w-full h-[180px] p-3 text-base border-2 border-gray-300 rounded-lg
+                     focus:border-blue-500 focus:outline-none resize-none font-sans bg-gray-50"
+            placeholder="Počnite pisati koristeći tipkovnicu ispod..."
+          />
+          <div className="mt-1 text-xs text-gray-500">
+            Znakova: {text.length}
+          </div>
+        </div>
 
+        <div className="flex-1 min-h-0">
           <Keyboard
             onInput={handleInput}
             onBackspace={handleBackspace}
             onSpace={handleSpace}
             onEnter={handleEnter}
           />
-
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-lg font-semibold text-gray-700 mb-3">
-              Hrvatski znakovi:
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {['č', 'ć', 'š', 'ž', 'đ', 'Č', 'Ć', 'Š', 'Ž', 'Đ'].map((char) => (
-                <button
-                  key={char}
-                  onClick={() => handleInput(char)}
-                  className="px-6 py-3 bg-blue-100 text-blue-900 rounded-lg font-bold text-2xl
-                           hover:bg-blue-200 active:scale-95 transition-all duration-100
-                           border-2 border-blue-300"
-                >
-                  {char}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
-
-        <footer className="mt-8 text-center text-gray-600">
-          <p>Koristite fizičku tipkovnicu ili kliknite na gumbe</p>
-        </footer>
       </div>
 
       {showSaveModal && (
