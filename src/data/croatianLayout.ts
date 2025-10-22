@@ -2,9 +2,6 @@ import { KeyboardLayout } from '../types/keyboard';
 
 export const croatianLayout: KeyboardLayout = [
   [
-    { main: 'ž', shift: 'Ž', code: 'Backquote' },
-    { main: '1', shift: '!', code: 'Digit1' },
-    { main: '2', shift: '"', code: 'Digit2' },
     { main: '3', shift: '#', code: 'Digit3' },
     { main: '4', shift: '$', code: 'Digit4' },
     { main: '5', shift: '%', code: 'Digit5' },
@@ -13,12 +10,8 @@ export const croatianLayout: KeyboardLayout = [
     { main: '8', shift: '(', code: 'Digit8' },
     { main: '9', shift: ')', code: 'Digit9' },
     { main: '0', shift: '=', code: 'Digit0' },
-    { main: "'", shift: '?', code: 'Minus' },
-    { main: '+', shift: '*', code: 'Equal' },
   ],
   [
-    { main: 'q', shift: 'Q', code: 'KeyQ' },
-    { main: 'w', shift: 'W', code: 'KeyW' },
     { main: 'e', shift: 'E', code: 'KeyE' },
     { main: 'r', shift: 'R', code: 'KeyR' },
     { main: 't', shift: 'T', code: 'KeyT' },
@@ -27,11 +20,8 @@ export const croatianLayout: KeyboardLayout = [
     { main: 'i', shift: 'I', code: 'KeyI' },
     { main: 'o', shift: 'O', code: 'KeyO' },
     { main: 'p', shift: 'P', code: 'KeyP' },
-    { main: 'š', shift: 'Š', code: 'BracketLeft' },
-    { main: 'đ', shift: 'Đ', code: 'BracketRight' },
   ],
   [
-    { main: 'a', shift: 'A', code: 'KeyA' },
     { main: 's', shift: 'S', code: 'KeyS' },
     { main: 'd', shift: 'D', code: 'KeyD' },
     { main: 'f', shift: 'F', code: 'KeyF' },
@@ -40,11 +30,8 @@ export const croatianLayout: KeyboardLayout = [
     { main: 'j', shift: 'J', code: 'KeyJ' },
     { main: 'k', shift: 'K', code: 'KeyK' },
     { main: 'l', shift: 'L', code: 'KeyL' },
-    { main: 'č', shift: 'Č', code: 'Semicolon' },
-    { main: 'ć', shift: 'Ć', code: 'Quote' },
   ],
   [
-    { main: 'y', shift: 'Y', code: 'KeyZ' },
     { main: 'x', shift: 'X', code: 'KeyX' },
     { main: 'c', shift: 'C', code: 'KeyC' },
     { main: 'v', shift: 'V', code: 'KeyV' },
@@ -53,6 +40,5 @@ export const croatianLayout: KeyboardLayout = [
     { main: 'm', shift: 'M', code: 'KeyM' },
     { main: ',', shift: ';', code: 'Comma' },
     { main: '.', shift: ':', code: 'Period' },
-    { main: '-', shift: '_', code: 'Slash' },
   ],
 ];

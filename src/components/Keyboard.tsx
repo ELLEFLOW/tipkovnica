@@ -111,11 +111,11 @@ export function Keyboard({ onInput, onBackspace, onSpace, onEnter }: KeyboardPro
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-200 to-gray-300 p-2 rounded-t-2xl shadow-lg h-full overflow-y-auto">
-      <div className="space-y-1.5">
-        {croatianLayout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-1">
-            {row.map((keyConfig) => (
+    <div className="w-full bg-gradient-to-b from-gray-200 to-gray-300 px-1 pt-3 pb-2 safe-bottom">
+      <div className="max-w-screen-lg mx-auto">
+        <div className="space-y-2">
+          <div className="flex justify-center gap-1.5">
+            {croatianLayout[0].map((keyConfig) => (
               <Key
                 key={keyConfig.code}
                 keyConfig={keyConfig}
@@ -124,67 +124,102 @@ export function Keyboard({ onInput, onBackspace, onSpace, onEnter }: KeyboardPro
                 isPressed={pressedKeys.has(keyConfig.code)}
               />
             ))}
-            {rowIndex === 0 && (
-              <button
-                onClick={handleBackspaceClick}
-                className={`
-                  min-w-[60px] h-[42px] rounded-md font-medium text-sm
-                  transition-all duration-100 shadow-sm touch-manipulation select-none
-                  ${pressedKeys.has('Backspace')
-                    ? 'bg-gray-500 text-white scale-95 shadow-inner'
-                    : 'bg-gray-400 text-white hover:bg-gray-500 active:scale-95'
-                  }
-                `}
-              >
-                ⌫
-              </button>
-            )}
+            <button
+              onClick={handleBackspaceClick}
+              className="min-w-[44px] h-[44px] rounded-lg font-medium text-base bg-gray-400
+                       text-white hover:bg-gray-500 active:scale-95 transition-all shadow-sm"
+            >
+              ⌫
+            </button>
           </div>
-        ))}
 
-        <div className="flex justify-center gap-1">
-          <button
-            onClick={handleShiftClick}
-            className={`
-              min-w-[50px] h-[42px] rounded-md font-medium text-sm
-              transition-all duration-100 shadow-sm touch-manipulation select-none
-              ${isShiftActive
-                ? 'bg-blue-500 text-white shadow-inner'
-                : 'bg-white text-gray-800 hover:bg-gray-100 active:scale-95 border border-gray-300'
-              }
-            `}
-          >
-            ⇧
-          </button>
+          <div className="flex justify-center gap-1.5 px-3">
+            {croatianLayout[1].map((keyConfig) => (
+              <Key
+                key={keyConfig.code}
+                keyConfig={keyConfig}
+                isShiftActive={isShiftActive}
+                onKeyClick={handleKeyClick}
+                isPressed={pressedKeys.has(keyConfig.code)}
+              />
+            ))}
+          </div>
 
-          <button
-            onClick={handleSpaceClick}
-            className={`
-              flex-1 h-[42px] rounded-md font-medium text-sm
-              transition-all duration-100 shadow-sm touch-manipulation select-none
-              ${pressedKeys.has('Space')
-                ? 'bg-gray-300 scale-95 shadow-inner'
-                : 'bg-white text-gray-800 hover:bg-gray-50 active:scale-95'
-              }
-              border border-gray-300
-            `}
-          >
-            SPACE
-          </button>
+          <div className="flex justify-center gap-1.5 px-6">
+            {croatianLayout[2].map((keyConfig) => (
+              <Key
+                key={keyConfig.code}
+                keyConfig={keyConfig}
+                isShiftActive={isShiftActive}
+                onKeyClick={handleKeyClick}
+                isPressed={pressedKeys.has(keyConfig.code)}
+              />
+            ))}
+          </div>
 
-          <button
-            onClick={handleEnterClick}
-            className={`
-              min-w-[50px] h-[42px] rounded-md font-medium text-sm
-              transition-all duration-100 shadow-sm touch-manipulation select-none
-              ${pressedKeys.has('Enter')
-                ? 'bg-blue-600 text-white scale-95 shadow-inner'
-                : 'bg-blue-500 text-white hover:bg-blue-600 active:scale-95'
-              }
-            `}
-          >
-            ↵
-          </button>
+          <div className="flex justify-center gap-1.5">
+            <button
+              onClick={handleShiftClick}
+              className={`min-w-[52px] h-[44px] rounded-lg font-medium text-lg transition-all shadow-sm
+                ${isShiftActive
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-white text-gray-800 border border-gray-300'
+                }`}
+            >
+              ⇧
+            </button>
+            {croatianLayout[3].map((keyConfig) => (
+              <Key
+                key={keyConfig.code}
+                keyConfig={keyConfig}
+                isShiftActive={isShiftActive}
+                onKeyClick={handleKeyClick}
+                isPressed={pressedKeys.has(keyConfig.code)}
+              />
+            ))}
+            <button
+              onClick={handleBackspaceClick}
+              className="min-w-[52px] h-[44px] rounded-lg font-medium text-lg bg-gray-400
+                       text-white hover:bg-gray-500 active:scale-95 transition-all shadow-sm"
+            >
+              ⌫
+            </button>
+          </div>
+
+          <div className="flex justify-center gap-1.5">
+            <button
+              className="min-w-[60px] h-[44px] rounded-lg font-medium text-base bg-gray-300
+                       text-gray-800 hover:bg-gray-400 active:scale-95 transition-all shadow-sm"
+            >
+              123
+            </button>
+            <button
+              className="min-w-[44px] h-[44px] rounded-lg font-medium text-base bg-white
+                       text-gray-800 border border-gray-300 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
+            >
+              ,
+            </button>
+            <button
+              onClick={handleSpaceClick}
+              className="flex-1 h-[44px] rounded-lg font-medium text-base bg-white
+                       text-gray-800 border border-gray-300 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
+            >
+              SPACE
+            </button>
+            <button
+              className="min-w-[44px] h-[44px] rounded-lg font-medium text-base bg-white
+                       text-gray-800 border border-gray-300 hover:bg-gray-50 active:scale-95 transition-all shadow-sm"
+            >
+              .
+            </button>
+            <button
+              onClick={handleEnterClick}
+              className="min-w-[60px] h-[44px] rounded-lg font-medium text-base bg-blue-500
+                       text-white hover:bg-blue-600 active:scale-95 transition-all shadow-sm"
+            >
+              ↵
+            </button>
+          </div>
         </div>
       </div>
     </div>

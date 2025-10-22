@@ -21,23 +21,23 @@ export function Key({ keyConfig, isShiftActive, onKeyClick, isPressed }: KeyProp
     <button
       onClick={handleClick}
       className={`
-        relative min-w-[42px] h-[42px] rounded-md font-medium text-lg
+        relative min-w-[44px] h-[44px] rounded-lg font-medium text-xl
         transition-all duration-100 shadow-sm
         ${isPressed
-          ? 'bg-blue-500 text-white scale-95 shadow-inner'
-          : 'bg-white text-gray-800 hover:bg-gray-50 active:scale-95'
+          ? 'bg-blue-500 text-white scale-95'
+          : 'bg-white text-gray-900 hover:bg-gray-50 active:scale-95'
         }
         border border-gray-300
         flex flex-col items-center justify-center
         touch-manipulation select-none
       `}
     >
-      {keyConfig.shift && (
-        <span className="absolute top-0.5 right-1 text-xs text-gray-500">
+      {keyConfig.shift && !isShiftActive && (
+        <span className="absolute top-0.5 left-1.5 text-[10px] text-gray-400">
           {keyConfig.shift}
         </span>
       )}
-      <span className={keyConfig.shift ? 'mt-0.5' : ''}>
+      <span className={keyConfig.shift && !isShiftActive ? 'mt-1' : ''}>
         {displayChar}
       </span>
     </button>
