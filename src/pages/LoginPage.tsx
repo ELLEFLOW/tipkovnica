@@ -9,6 +9,19 @@ export function LoginPage({ onSwitchToRegister }: { onSwitchToRegister: () => vo
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
 
+  const handleAdminLogin = async () => {
+    setError('');
+    setLoading(true);
+
+    const { error } = await signIn('admin@tipkovnica.hr', 'admin123');
+
+    if (error) {
+      setError(error.message);
+    }
+
+    setLoading(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -41,6 +54,25 @@ export function LoginPage({ onSwitchToRegister }: { onSwitchToRegister: () => vo
             {error}
           </div>
         )}
+
+        <button
+          onClick={handleAdminLogin}
+          disabled={loading}
+          className="w-full mb-4 py-3 bg-purple-600 text-white rounded-lg font-semibold
+                   hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed
+                   transition-colors duration-200"
+        >
+          🔑 Admin prijava (brza)
+        </button>
+
+        <div className="relative mb-4">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">ili</span>
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
